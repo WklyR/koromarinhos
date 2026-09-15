@@ -25,15 +25,20 @@ html{scroll-behavior:smooth;}
 
 body{
   margin:0;
-  background:
-    repeating-linear-gradient(-58deg, rgba(51,209,255,0.025) 0px, rgba(51,209,255,0.025) 2px, transparent 2px, transparent 46px),
-    repeating-linear-gradient(32deg, rgba(255,46,115,0.02) 0px, rgba(255,46,115,0.02) 2px, transparent 2px, transparent 60px),
-    var(--bg);
+  background:var(--bg);
   color:var(--ink);
   font-family:'Manrope', sans-serif;
   font-size:16.5px;
   line-height:1.65;
   -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+body::before{
+  content:'';
+  position:fixed; inset:0; z-index:-1;
+  background:
+    linear-gradient(180deg, rgba(6,12,34,0.93), rgba(6,12,34,0.97) 55%, var(--bg) 100%),
+    url('assets/fundo-koromaru.jpg') center 20% / cover no-repeat;
 }
 
 a{color:inherit;}
