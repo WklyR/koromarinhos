@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sugestões — Koromaru</title>
+<meta name="description" content="Envie sugestões, ideias de comandos ou reporte bugs do Koromaru.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+<header class="topbar">
+  <div class="brand"><span class="paw">🐾</span> Koromaru</div>
+  <label for="nav-toggle" class="hamburger" aria-label="Abrir menu">
+    <span></span><span></span><span></span>
+  </label>
+</header>
+<aside class="sidebar">
+  <div class="sidebar-glow"></div>
+  <div class="brand sidebar-brand"><span class="paw">🐾</span> Koromaru</div>
+  <nav class="navlist">
+    <a class="navitem tilt-0" href="index.html"><span class="navitem-fill"></span><span class="navitem-txt">🐾 Início</span></a>
+    <a class="navitem tilt-1" href="musica.html"><span class="navitem-fill"></span><span class="navitem-txt">🎶 Música</span></a>
+    <a class="navitem tilt-2" href="economia.html"><span class="navitem-fill"></span><span class="navitem-txt">💰 Economia</span></a>
+    <a class="navitem tilt-3" href="maru-store.html"><span class="navitem-fill"></span><span class="navitem-txt">🏬 Maru Store</span></a>
+    <a class="navitem tilt-4" href="maru-e-cia.html"><span class="navitem-fill"></span><span class="navitem-txt">📞 Maru & Cia</span></a>
+    <a class="navitem tilt-5" href="uno.html"><span class="navitem-fill"></span><span class="navitem-txt">🃏 UNO</span></a>
+    <a class="navitem tilt-0" href="comandos.html"><span class="navitem-fill"></span><span class="navitem-txt">📖 Comandos</span></a>
+    <a class="navitem tilt-1" href="atualizacoes.html"><span class="navitem-fill"></span><span class="navitem-txt">📰 Atualizações</span></a>
+    <a class="navitem active tilt-2" href="sugestoes.html"><span class="navitem-fill"></span><span class="navitem-txt">💌 Sugestões</span></a>
+  </nav>
+  <div class="sidebar-bottom">
+    <span class="exclusive-tag">🔒 Bot exclusivo deste servidor</span>
+    <a class="btn btn-block" href="https://discord.gg/B9Vd4QWvcq">💌 Servidor de Suporte</a>
+  </div>
+</aside>
+<label for="nav-toggle" class="nav-scrim"></label>
+
+<div class="page">
+<main class="content">
+
+<span class="eyebrow"><span class="slash"></span>Sua opinião importa</span>
+<h1 style="margin-top:12px; font-size:clamp(1.8rem,3.4vw,2.6rem);">Sugestões</h1>
+<p style="color:var(--ink-dim); margin-top:14px; max-width:56ch;">Achou um bug? Quer um comando
+novo? Manda aqui — a sugestão vai direto pro e-mail de quem cuida do Koromaru.</p>
+
+<div class="formcard">
+  <form action="https://formspree.io/f/xljeqvbo" method="POST">
+    <div class="field">
+      <label for="nome">Seu nome ou usuário do Discord (opcional)</label>
+      <input type="text" id="nome" name="nome" placeholder="ex: sam#0001">
+    </div>
+    <div class="field">
+      <label for="tipo">Tipo</label>
+      <select id="tipo" name="tipo">
+        <option>Sugestão de comando</option>
+        <option>Reportar um bug</option>
+        <option>Outro</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="mensagem">Sua sugestão *</label>
+      <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Descreve com o máximo de detalhes que conseguir..."></textarea>
+    </div>
+    <button class="btn pop" type="submit">Enviar sugestão</button>
+    <p class="formnote">Esse formulário usa o Formspree pra chegar direto no e-mail — não
+    precisa de conta nem login pra enviar.</p>
+  </form>
+
+  <div class="altcontact">
+    Prefere mandar direto? Escreve pra
+    <a href="mailto:cunhatavaressa@gmail.com?subject=Sugest%C3%A3o%20para%20o%20Koromaru" style="color:var(--accent-soft)">cunhatavaressa@gmail.com</a>.
+  </div>
+</div>
+
+<div class="radar">
+  <span class="eyebrow"><span class="slash"></span>No radar</span>
+  <p style="color:var(--ink-dim); margin-top:10px;">Ideias já cogitadas e que podem virar
+  realidade em breve:</p>
+  <ul>
+    <li><span class="slash"></span><code>r!tarot</code> — carta de Arcana aleatória com mensagem temática do dia</li>
+    <li><span class="slash"></span><code>r!diaria</code> — sequência (streak) de dias trabalhando seguidos</li>
+    <li><span class="slash"></span>Sistema de níveis por atividade no chat</li>
+  </ul>
+</div>
+
+
+<footer class="sitefooter">
+  <span>🐾 Koromaru — feito pra um servidor que gosta dele por perto.</span>
+  <span class="footversion">v1.2.1</span>
+</footer>
+
+</main>
+</div>
+
+<script>
+// Som de menu ao passar o mouse pelos itens da barra lateral — sintetizado na hora,
+// sem precisar de nenhum arquivo de áudio.
+(function(){
+  var audioCtx;
+  function tocarSom(freq){
+    try{
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      if(audioCtx.state === 'suspended'){ audioCtx.resume(); }
+      var t0 = audioCtx.currentTime;
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, t0);
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.35, t0 + 0.07);
+      gain.gain.setValueAtTime(0.001, t0);
+      gain.gain.exponentialRampToValueAtTime(0.05, t0 + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.13);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(t0);
+      osc.stop(t0 + 0.14);
+    }catch(e){}
+  }
+  document.querySelectorAll('.navitem').forEach(function(el, i){
+    el.addEventListener('mouseenter', function(){ tocarSom(560 + (i % 6) * 55); });
+  });
+})();
+</script>
+
+
+</body>
+</html>

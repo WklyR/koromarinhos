@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maru Store — Koromaru</title>
+<meta name="description" content="Como funciona a loja e o inventário do Koromaru.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+<header class="topbar">
+  <div class="brand"><span class="paw">🐾</span> Koromaru</div>
+  <label for="nav-toggle" class="hamburger" aria-label="Abrir menu">
+    <span></span><span></span><span></span>
+  </label>
+</header>
+<aside class="sidebar">
+  <div class="sidebar-glow"></div>
+  <div class="brand sidebar-brand"><span class="paw">🐾</span> Koromaru</div>
+  <nav class="navlist">
+    <a class="navitem tilt-0" href="index.html"><span class="navitem-fill"></span><span class="navitem-txt">🐾 Início</span></a>
+    <a class="navitem tilt-1" href="musica.html"><span class="navitem-fill"></span><span class="navitem-txt">🎶 Música</span></a>
+    <a class="navitem tilt-2" href="economia.html"><span class="navitem-fill"></span><span class="navitem-txt">💰 Economia</span></a>
+    <a class="navitem active tilt-3" href="maru-store.html"><span class="navitem-fill"></span><span class="navitem-txt">🏬 Maru Store</span></a>
+    <a class="navitem tilt-4" href="maru-e-cia.html"><span class="navitem-fill"></span><span class="navitem-txt">📞 Maru & Cia</span></a>
+    <a class="navitem tilt-5" href="uno.html"><span class="navitem-fill"></span><span class="navitem-txt">🃏 UNO</span></a>
+    <a class="navitem tilt-0" href="comandos.html"><span class="navitem-fill"></span><span class="navitem-txt">📖 Comandos</span></a>
+    <a class="navitem tilt-1" href="atualizacoes.html"><span class="navitem-fill"></span><span class="navitem-txt">📰 Atualizações</span></a>
+    <a class="navitem tilt-2" href="sugestoes.html"><span class="navitem-fill"></span><span class="navitem-txt">💌 Sugestões</span></a>
+  </nav>
+  <div class="sidebar-bottom">
+    <span class="exclusive-tag">🔒 Bot exclusivo deste servidor</span>
+    <a class="btn btn-block" href="https://discord.gg/B9Vd4QWvcq">💌 Servidor de Suporte</a>
+  </div>
+</aside>
+<label for="nav-toggle" class="nav-scrim"></label>
+
+<div class="page">
+<main class="content">
+
+<div class="feature-hero">
+  <div class="band"></div>
+  <div class="kicker">🏬<span class="tagchip">Sistema 03/05</span></div>
+  <h1>Maru Store</h1>
+  <p class="sub">A lojinha oficial do servidor: cargos, itens e colecionáveis, tudo comprado com Marus.</p>
+</div>
+
+<p class="bigtext">A vitrine (<code>r!loja</code>) fica sempre aberta, com um botão de compra
+direto na mensagem. Cada item tem um ID — é só usar <code>r!comprar &lt;ID&gt;</code> e, se for um
+cargo, ele chega no seu perfil em poucos segundos. Alguns itens podem ser <b>assinaturas</b>, que
+cobram automaticamente toda semana enquanto estiverem ativas — dá pra cancelar quando quiser com
+<code>r!cancelarassinatura</code>.</p>
+
+<p class="bigtext">Tudo que você já ganhou (seja comprado na loja ou sorteado no Maru &amp; Cia)
+aparece no seu <b>inventário</b> (<code>r!inventario</code>), junto com seus cargos e sua foto de
+perfil. E se quiser um colecionável que outra pessoa tem, dá pra propor uma troca direta com
+<code>r!trade @pessoa</code> — ela escolhe se aceita ou recusa.</p>
+
+<div class="subgrid">
+  <div class="subcard"><h4>🛍️ Vitrine</h4><p>Sempre aberta, com botão de compra na própria mensagem.</p></div>
+  <div class="subcard"><h4>🎭 Cargos automáticos</h4><p>Comprou um cargo? Chega no seu perfil sozinho.</p></div>
+  <div class="subcard"><h4>🔁 Assinaturas</h4><p>Cobrança recorrente pra itens que duram mais.</p></div>
+  <div class="subcard"><h4>🎒 Inventário</h4><p>Reúne tudo que você já ganhou, num lugar só.</p></div>
+</div>
+
+<div class="control-hint"><span><b>🏬</b> r!loja</span><span><b>🛒</b> r!comprar &lt;ID&gt;</span><span><b>🎒</b> r!inventario</span><span><b>🔁</b> r!trade @pessoa</span></div>
+
+
+<footer class="sitefooter">
+  <span>🐾 Koromaru — feito pra um servidor que gosta dele por perto.</span>
+  <span class="footversion">v1.2.1</span>
+</footer>
+
+</main>
+</div>
+
+<script>
+// Som de menu ao passar o mouse pelos itens da barra lateral — sintetizado na hora,
+// sem precisar de nenhum arquivo de áudio.
+(function(){
+  var audioCtx;
+  function tocarSom(freq){
+    try{
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      if(audioCtx.state === 'suspended'){ audioCtx.resume(); }
+      var t0 = audioCtx.currentTime;
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, t0);
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.35, t0 + 0.07);
+      gain.gain.setValueAtTime(0.001, t0);
+      gain.gain.exponentialRampToValueAtTime(0.05, t0 + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.13);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(t0);
+      osc.stop(t0 + 0.14);
+    }catch(e){}
+  }
+  document.querySelectorAll('.navitem').forEach(function(el, i){
+    el.addEventListener('mouseenter', function(){ tocarSom(560 + (i % 6) * 55); });
+  });
+})();
+</script>
+
+
+</body>
+</html>

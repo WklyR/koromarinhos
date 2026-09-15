@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comandos — Koromaru</title>
+<meta name="description" content="Lista completa de comandos do Koromaru, com busca e paginação.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+<header class="topbar">
+  <div class="brand"><span class="paw">🐾</span> Koromaru</div>
+  <label for="nav-toggle" class="hamburger" aria-label="Abrir menu">
+    <span></span><span></span><span></span>
+  </label>
+</header>
+<aside class="sidebar">
+  <div class="sidebar-glow"></div>
+  <div class="brand sidebar-brand"><span class="paw">🐾</span> Koromaru</div>
+  <nav class="navlist">
+    <a class="navitem tilt-0" href="index.html"><span class="navitem-fill"></span><span class="navitem-txt">🐾 Início</span></a>
+    <a class="navitem tilt-1" href="musica.html"><span class="navitem-fill"></span><span class="navitem-txt">🎶 Música</span></a>
+    <a class="navitem tilt-2" href="economia.html"><span class="navitem-fill"></span><span class="navitem-txt">💰 Economia</span></a>
+    <a class="navitem tilt-3" href="maru-store.html"><span class="navitem-fill"></span><span class="navitem-txt">🏬 Maru Store</span></a>
+    <a class="navitem tilt-4" href="maru-e-cia.html"><span class="navitem-fill"></span><span class="navitem-txt">📞 Maru & Cia</span></a>
+    <a class="navitem tilt-5" href="uno.html"><span class="navitem-fill"></span><span class="navitem-txt">🃏 UNO</span></a>
+    <a class="navitem active tilt-0" href="comandos.html"><span class="navitem-fill"></span><span class="navitem-txt">📖 Comandos</span></a>
+    <a class="navitem tilt-1" href="atualizacoes.html"><span class="navitem-fill"></span><span class="navitem-txt">📰 Atualizações</span></a>
+    <a class="navitem tilt-2" href="sugestoes.html"><span class="navitem-fill"></span><span class="navitem-txt">💌 Sugestões</span></a>
+  </nav>
+  <div class="sidebar-bottom">
+    <span class="exclusive-tag">🔒 Bot exclusivo deste servidor</span>
+    <a class="btn btn-block" href="https://discord.gg/B9Vd4QWvcq">💌 Servidor de Suporte</a>
+  </div>
+</aside>
+<label for="nav-toggle" class="nav-scrim"></label>
+
+<div class="page">
+<main class="content">
+
+<span class="eyebrow"><span class="slash"></span>Referência completa</span>
+<h1 style="margin-top:12px; font-size:clamp(1.8rem,3.4vw,2.6rem);">Todos os comandos</h1>
+<p style="color:var(--ink-dim); margin-top:14px; max-width:56ch; font-size:1.05rem;">Prefixos:
+<code>r!</code> <code>-</code> <code>k!</code> <code>K!</code> ou <code>/</code>. Cada comando
+vem com uma explicação de como ele funciona. Use a busca ou passe as páginas pra navegar.</p>
+
+<input class="cmdsearch" id="buscaComando" type="text" placeholder="🔍 Buscar um comando... (ex: música, pix, uno)" oninput="filtrarComandos(this.value)">
+
+<div id="areaComandos"></div>
+<div class="pager" id="pager">
+  <button id="btnAnterior" onclick="mudarPagina(-1)">◀️ Anterior</button>
+  <span class="pageinfo" id="pageinfo">Página 1 de 1</span>
+  <button id="btnProxima" onclick="mudarPagina(1)">Próxima ▶️</button>
+</div>
+<p id="semresultado" style="display:none; color:var(--ink-dimmer); margin-top:30px;">Nenhum
+comando encontrado. Tenta outra palavra, ou sugere um novo na página
+<a href="sugestoes.html" style="color:var(--accent-soft)">Sugestões</a>.</p>
+
+
+<footer class="sitefooter">
+  <span>🐾 Koromaru — feito pra um servidor que gosta dele por perto.</span>
+  <span class="footversion">v1.2.1</span>
+</footer>
+
+</main>
+</div>
+
+<script>
+// Som de menu ao passar o mouse pelos itens da barra lateral — sintetizado na hora,
+// sem precisar de nenhum arquivo de áudio.
+(function(){
+  var audioCtx;
+  function tocarSom(freq){
+    try{
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      if(audioCtx.state === 'suspended'){ audioCtx.resume(); }
+      var t0 = audioCtx.currentTime;
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, t0);
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.35, t0 + 0.07);
+      gain.gain.setValueAtTime(0.001, t0);
+      gain.gain.exponentialRampToValueAtTime(0.05, t0 + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.13);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(t0);
+      osc.stop(t0 + 0.14);
+    }catch(e){}
+  }
+  document.querySelectorAll('.navitem').forEach(function(el, i){
+    el.addEventListener('mouseenter', function(){ tocarSom(560 + (i % 6) * 55); });
+  });
+})();
+</script>
+
+
+<script>
+const CATEGORIAS = [{"emoji": "🎶", "nome": "Música", "itens": [{"cmd": "r!tocar <nome ou link>", "desc": "Busca no YouTube e toca — ou entra na fila se já tiver algo tocando."}, {"cmd": "r!pular", "desc": "Pula a música atual e passa pra próxima da fila."}, {"cmd": "r!fila", "desc": "Mostra a lista completa de músicas esperando pra tocar."}, {"cmd": "r!loop", "desc": "Repete a música atual em loop até você desativar."}, {"cmd": "r!24-7", "desc": "Deixa o bot plantado no canal de voz o dia inteiro, mesmo sem tocar nada."}, {"cmd": "r!remover <nome>", "desc": "Remove uma música específica da fila, sem precisar pular tudo."}, {"cmd": "r!parar", "desc": "Para a reprodução e limpa a fila inteira de uma vez."}, {"cmd": "r!sair", "desc": "Tira o bot do canal de voz."}]}, {"emoji": "💰", "nome": "Economia (Marus)", "itens": [{"cmd": "r!criarconta", "desc": "Abre um formulário seguro pra criar sua conta na economia do servidor."}, {"cmd": "r!redefinirsenha", "desc": "Esqueceu a senha? Define uma nova com segurança."}, {"cmd": "r!mudarchave", "desc": "Troca sua chave de Pix, pedindo a senha atual pra confirmar."}, {"cmd": "r!trabalhar", "desc": "Renda diária de Marus — pode usar todos os dias, sem intervalo de semana."}, {"cmd": "r!salario", "desc": "Resgata um pagamento bem maior, uma vez a cada 7 dias."}, {"cmd": "r!pix", "desc": "Abre um formulário seguro pra transferir Marus pra outro membro."}, {"cmd": "r!pagar", "desc": "Paga (total ou parcialmente) uma dívida em aberto."}, {"cmd": "r!saldo [@pessoa]", "desc": "Mostra seu saldo e dívida, ou os de outra pessoa."}, {"cmd": "r!ranking", "desc": "Lista os 10 membros com mais Marus no servidor."}]}, {"emoji": "🎲", "nome": "Jogos", "itens": [{"cmd": "r!cassino <valor>", "desc": "Aposta num caça-níquel com vários níveis de prêmio (e de perda)."}, {"cmd": "r!moeda apostar <cara|coroa> @pessoa <valor>", "desc": "Desafia alguém pra um cara ou coroa; a pessoa escolhe aceitar ou recusar."}, {"cmd": "r!uno [aposta]", "desc": "Abre uma sala de UNO (2 a 6 jogadores), com aposta em Marus opcional."}, {"cmd": "r!ligar 6672 7275 <frase>", "desc": "Responde ao evento do Maru & Cia pra concorrer a Marus e colecionáveis."}]}, {"emoji": "🏬", "nome": "Maru Store e Inventário", "itens": [{"cmd": "r!loja", "desc": "Mostra a vitrine completa da Maru Store, com botão de compra."}, {"cmd": "r!comprar <ID>", "desc": "Compra o item daquele ID — cargos chegam automaticamente."}, {"cmd": "r!minhasassinaturas", "desc": "Lista suas assinaturas ativas na loja."}, {"cmd": "r!cancelarassinatura <ID>", "desc": "Cancela uma assinatura pra parar a cobrança recorrente."}, {"cmd": "r!inventario [@pessoa]", "desc": "Mostra cargos, colecionáveis e foto de perfil de alguém."}, {"cmd": "r!trade @pessoa", "desc": "Propõe trocar um colecionável seu por um da outra pessoa."}]}, {"emoji": "✨", "nome": "Diversão e utilidade", "itens": [{"cmd": "r!avatar [@pessoa]", "desc": "Mostra a foto de perfil de alguém, em tamanho grande."}, {"cmd": "r!banner [@pessoa]", "desc": "Mostra o banner de perfil do Discord de alguém, se tiver um."}, {"cmd": "r!servidor", "desc": "Mostra informações gerais sobre o servidor atual."}, {"cmd": "r!userinfo [@pessoa]", "desc": "Mostra dados sobre um membro: quando entrou, cargos, etc."}, {"cmd": "r!rolar <NdM>", "desc": "Rola dados no formato clássico de RPG, tipo 2d6."}, {"cmd": "r!oraculo <pergunta>", "desc": "Faz uma pergunta de sim ou não pro faro místico do Koromaru."}, {"cmd": "r!enquete <pergunta>", "desc": "Cria uma enquete rápida com reações de sim/não."}, {"cmd": "r!lembrete <minutos> <texto>", "desc": "Te avisa depois de um tempo, no mesmo canal."}, {"cmd": "r!sorte", "desc": "Mostra a previsão do dia, no estilo horóscopo."}, {"cmd": "r!shipp @a @b", "desc": "Calcula (sem nenhuma ciência) o quanto duas pessoas combinam."}, {"cmd": "r!curiosidade", "desc": "Manda uma curiosidade aleatória sobre anime, jogos ou música."}, {"cmd": "r!alisar", "desc": "Alisa o Koromaru. Ele agradece."}, {"cmd": "r!novidades", "desc": "Mostra o changelog da versão atual e o histórico de versões."}, {"cmd": "r!ajuda", "desc": "Lista resumida de todos os comandos, direto no Discord."}]}, {"emoji": "🛡️", "nome": "Administração", "itens": [{"cmd": "r!banir @pessoa", "desc": "Bane um membro do servidor. Requer permissão de Administrador."}, {"cmd": "r!desbanir <ID>", "desc": "Remove o banimento de alguém pelo ID. Admin."}, {"cmd": "r!expulsar @pessoa", "desc": "Expulsa um membro sem banir permanentemente. Admin."}, {"cmd": "r!mutar @pessoa", "desc": "Silencia um membro no servidor. Admin."}, {"cmd": "r!desmutar @pessoa", "desc": "Remove o silenciamento de um membro. Admin."}, {"cmd": "r!avisar @pessoa <motivo>", "desc": "Registra um aviso formal pro membro. Admin."}, {"cmd": "r!avisos @pessoa", "desc": "Mostra os avisos que aquele membro já recebeu."}, {"cmd": "r!listavisos", "desc": "Lista todos os avisos já dados no servidor. Admin."}, {"cmd": "r!limpar <quantidade>", "desc": "Apaga uma quantidade de mensagens do canal. Admin."}, {"cmd": "r!configurar", "desc": "Abre o painel de configuração do bot (embeds, loja, inventário). Admin."}, {"cmd": "r!altstatus", "desc": "Alterna a atividade do bot entre texto, jogo e música. Admin."}, {"cmd": "r!trocarjogo", "desc": "Troca na hora o jogo mostrado na atividade. Admin."}]}];
+const POR_PAGINA = 2;
+let paginaAtual = 0;
+let buscaAtual = "";
+
+function copiarComando(btn, cmd){
+  navigator.clipboard.writeText(cmd).then(function(){
+    var original = btn.textContent;
+    btn.textContent = 'Copiado!';
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent = original; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+function renderCmdRow(cmd, desc){
+  var primeira = cmd.split(' ')[0];
+  return '<div class="cmdrow"><code>' + cmd + '</code><span class="desc">' + desc + '</span>' +
+    '<button class="copybtn" onclick="copiarComando(this, \'' + primeira + '\')">Copiar</button></div>';
+}
+
+function renderCategoria(cat){
+  var linhas = cat.itens.map(function(i){ return renderCmdRow(i.cmd, i.desc); }).join('');
+  return '<div class="cmdcat"><h3>' + cat.emoji + ' ' + cat.nome + '</h3><div class="cmdtable">' + linhas + '</div></div>';
+}
+
+function categoriasFiltradas(){
+  if(!buscaAtual) return CATEGORIAS;
+  var termo = buscaAtual.toLowerCase();
+  return CATEGORIAS.map(function(cat){
+    var itens = cat.itens.filter(function(i){
+      return (i.cmd + ' ' + i.desc).toLowerCase().indexOf(termo) !== -1;
+    });
+    return {emoji: cat.emoji, nome: cat.nome, itens: itens};
+  }).filter(function(cat){ return cat.itens.length > 0; });
+}
+
+function render(){
+  var categorias = categoriasFiltradas();
+  var area = document.getElementById('areaComandos');
+  var pager = document.getElementById('pager');
+  var semresultado = document.getElementById('semresultado');
+
+  if(categorias.length === 0){
+    area.innerHTML = '';
+    pager.style.display = 'none';
+    semresultado.style.display = '';
+    return;
+  }
+  semresultado.style.display = 'none';
+
+  if(buscaAtual){
+    area.innerHTML = categorias.map(renderCategoria).join('');
+    pager.style.display = 'none';
+    return;
+  }
+
+  pager.style.display = 'flex';
+  var totalPaginas = Math.ceil(categorias.length / POR_PAGINA);
+  if(paginaAtual >= totalPaginas) paginaAtual = totalPaginas - 1;
+  if(paginaAtual < 0) paginaAtual = 0;
+  var inicio = paginaAtual * POR_PAGINA;
+  var pagina = categorias.slice(inicio, inicio + POR_PAGINA);
+  area.innerHTML = pagina.map(renderCategoria).join('');
+  document.getElementById('pageinfo').textContent = 'Página ' + (paginaAtual + 1) + ' de ' + totalPaginas;
+  document.getElementById('btnAnterior').disabled = paginaAtual === 0;
+  document.getElementById('btnProxima').disabled = paginaAtual >= totalPaginas - 1;
+  window.scrollTo({top: 0, behavior: 'instant'});
+}
+
+function mudarPagina(delta){
+  paginaAtual += delta;
+  render();
+}
+
+function filtrarComandos(texto){
+  buscaAtual = texto.trim();
+  paginaAtual = 0;
+  render();
+}
+
+render();
+</script>
+
+</body>
+</html>
